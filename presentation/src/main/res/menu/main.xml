@@ -83,4 +83,14 @@
         android:visible="false"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/selectAll"
+        android:title="@string/main_menu_select_all"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/readAll"
+        android:title="@string/main_menu_read_all"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>

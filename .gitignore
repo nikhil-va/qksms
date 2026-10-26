@@ -61,3 +61,7 @@ tools/bank-sms/out/
 # Release signing config (passwords)
 key.properties
 *.keystore
+
+# Android Studio "Generate Signed APK/Bundle" output
+presentation/*/release/
+presentation/release/

@@ -271,6 +271,18 @@ class MainViewModel @Inject constructor(
                 .subscribe()
 
         view.optionsItemIntent
+                .filter { itemId -> itemId == R.id.selectAll }
+                .autoDisposable(view.scope())
+                .subscribe { view.selectAll() }
+
+        view.optionsItemIntent
+                .filter { itemId -> itemId == R.id.readAll }
+                .filter { permissionManager.isDefaultSms().also { if (!it) view.requestDefaultSms() } }
+                .map { conversationRepo.getConversations().map { conversation -> conversation.id } }
+                .autoDisposable(view.scope())
+                .subscribe { conversations -> markRead.execute(conversations) }
+
+        view.optionsItemIntent
                 .filter { itemId -> itemId == R.id.archive }
                 .withLatestFrom(view.conversationsSelectedIntent) { _, conversations ->
                     markArchived.execute(conversations)

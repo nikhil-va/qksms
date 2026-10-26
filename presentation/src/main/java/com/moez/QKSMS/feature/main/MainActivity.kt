@@ -42,6 +42,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChanges
+import com.moez.QKSMS.BuildConfig
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.Navigator
 import com.moez.QKSMS.common.androidxcompat.drawerOpen
@@ -164,6 +165,8 @@ class MainActivity : QkThemedActivity(), MainView {
         // Don't allow clicks to pass through the drawer layout
         drawer.clicks().autoDisposable(scope()).subscribe()
 
+        drawerVersion.text = getString(R.string.drawer_version, BuildConfig.VERSION_NAME)
+
         // Set the theme color tint to the recyclerView, progressbar, and FAB
         theme
                 .autoDisposable(scope())
@@ -244,6 +247,15 @@ class MainActivity : QkThemedActivity(), MainView {
         toolbar.menu.findItem(R.id.read)?.isVisible = markRead && selectedConversations != 0
         toolbar.menu.findItem(R.id.unread)?.isVisible = !markRead && selectedConversations != 0
         toolbar.menu.findItem(R.id.block)?.isVisible = selectedConversations != 0
+        toolbar.menu.findItem(R.id.selectAll)?.isVisible = state.page is Inbox || state.page is Archived
+        toolbar.menu.findItem(R.id.readAll)?.isVisible = state.page is Inbox && selectedConversations == 0
+
+        // Large title at the top of the screen
+        pageTitle.setVisible(state.page !is Searching)
+        pageTitle.setText(when (state.page) {
+            is Archived -> R.string.title_archived
+            else -> R.string.main_title_inbox
+        })
 
         rateLayout.setVisible(state.showRating)
 
@@ -364,6 +376,10 @@ class MainActivity : QkThemedActivity(), MainView {
     override fun clearSearch() {
         dismissKeyboard()
         toolbarSearch.text = null
+    }
+
+    override fun selectAll() {
+        conversationsAdapter.selectAll()
     }
 
     override fun clearSelection() {

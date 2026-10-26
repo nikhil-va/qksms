@@ -41,6 +41,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
+    <!-- Shown over the avatar while the conversation is selected -->
+    <ImageView
+        android:id="@+id/selectedCheck"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/circle"
+        android:contentDescription="@null"
+        android:padding="12dp"
+        android:src="@drawable/ic_check_white_24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/avatars"
+        app:layout_constraintEnd_toEndOf="@id/avatars"
+        app:layout_constraintStart_toStartOf="@id/avatars"
+        app:layout_constraintTop_toTopOf="@id/avatars"
+        tools:backgroundTint="@color/tools_theme"
+        tools:visibility="visible" />
+
     <com.moez.QKSMS.common.widget.QkTextView
         android:id="@+id/title"
         style="@style/TextPrimary"

@@ -24,7 +24,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.Navigator
-import com.moez.QKSMS.common.util.Colors
+import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.common.util.extensions.setTint
 import com.moez.QKSMS.injection.appComponent
@@ -37,21 +37,17 @@ class AvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
 
-    @Inject lateinit var colors: Colors
     @Inject lateinit var navigator: Navigator
 
     private var lookupKey: String? = null
     private var fullName: String? = null
     private var photoUri: String? = null
     private var lastUpdated: Long? = null
-    private var theme: Colors.Theme
 
     init {
         if (!isInEditMode) {
             appComponent.inject(this)
         }
-
-        theme = colors.theme()
 
         View.inflate(context, R.layout.avatar_view, this)
         setBackgroundResource(R.drawable.circle)
@@ -66,7 +62,6 @@ class AvatarView @JvmOverloads constructor(
         fullName = recipient?.contact?.name
         photoUri = recipient?.contact?.photoUri
         lastUpdated = recipient?.contact?.lastUpdate
-        theme = colors.theme(recipient)
         updateView()
     }
 
@@ -79,10 +74,10 @@ class AvatarView @JvmOverloads constructor(
     }
 
     private fun updateView() {
-        // Apply theme
-        setBackgroundTint(theme.theme)
-        initial.setTextColor(theme.textPrimary)
-        icon.setTint(theme.textPrimary)
+        // Neutral, like the system's contact avatars: no per-contact or accent colour
+        setBackgroundTint(context.resolveThemeColor(R.attr.bubbleColor))
+        initial.setTextColor(context.resolveThemeColor(android.R.attr.textColorSecondary))
+        icon.setTint(context.resolveThemeColor(android.R.attr.textColorSecondary))
 
         val initials = fullName
                 ?.substringBefore(',')

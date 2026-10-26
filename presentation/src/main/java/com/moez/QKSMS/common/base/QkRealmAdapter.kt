@@ -74,6 +74,15 @@ abstract class QkRealmAdapter<T : RealmModel> : RealmRecyclerViewAdapter<T, QkVi
         return selection.contains(id)
     }
 
+    /**
+     * Selects every item, using their stable ids
+     */
+    fun selectAll() {
+        selection = (0 until itemCount).map(::getItemId).filter { id -> id != RecyclerView.NO_ID }
+        selectionChanges.onNext(selection)
+        notifyDataSetChanged()
+    }
+
     fun clearSelection() {
         selection = listOf()
         selectionChanges.onNext(selection)

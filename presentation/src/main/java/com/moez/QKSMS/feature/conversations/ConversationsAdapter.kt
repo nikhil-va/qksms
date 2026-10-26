@@ -34,6 +34,7 @@ import com.moez.QKSMS.common.base.QkViewHolder
 import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.DateFormatter
 import com.moez.QKSMS.common.util.extensions.resolveThemeColor
+import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.common.util.extensions.setTint
 import com.moez.QKSMS.model.Conversation
 import com.moez.QKSMS.util.PhoneNumberUtils
@@ -77,14 +78,14 @@ class ConversationsAdapter @Inject constructor(
             view.setOnClickListener {
                 val conversation = getItem(adapterPosition) ?: return@setOnClickListener
                 when (toggleSelection(conversation.id, false)) {
-                    true -> view.isActivated = isSelected(conversation.id)
+                    true -> bindSelection(this, conversation.id)
                     false -> navigator.showConversation(conversation.id)
                 }
             }
             view.setOnLongClickListener {
                 val conversation = getItem(adapterPosition) ?: return@setOnLongClickListener true
                 toggleSelection(conversation.id)
-                view.isActivated = isSelected(conversation.id)
+                bindSelection(this, conversation.id)
                 true
             }
         }
@@ -103,7 +104,7 @@ class ConversationsAdapter @Inject constructor(
         }
         val theme = colors.theme(recipient).theme
 
-        holder.containerView.isActivated = isSelected(conversation.id)
+        bindSelection(holder, conversation.id)
 
         holder.avatars.recipients = conversation.recipients
         holder.title.collapseEnabled = conversation.recipients.size > 1
@@ -121,6 +122,13 @@ class ConversationsAdapter @Inject constructor(
         }
         holder.pinned.isVisible = conversation.pinned
         holder.unread.setTint(theme)
+    }
+
+    private fun bindSelection(holder: QkViewHolder, conversationId: Long) {
+        val selected = isSelected(conversationId)
+        holder.containerView.isActivated = selected
+        holder.selectedCheck.isVisible = selected
+        holder.selectedCheck.setBackgroundTint(colors.theme().theme)
     }
 
     override fun getItemId(position: Int): Long {

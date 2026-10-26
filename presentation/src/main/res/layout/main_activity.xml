@@ -29,6 +29,22 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
+        <!-- Large page title in the space at the top of the screen -->
+        <TextView
+            android:id="@+id/pageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingTop="32dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="8dp"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+            android:textColor="?android:attr/textColorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Messages" />
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
@@ -74,7 +90,7 @@
             android:gravity="center"
             android:padding="56dp"
             app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pageTitle"
             tools:text="Your conversations will appear here"
             tools:visibility="invisible" />
 
@@ -88,7 +104,7 @@
             android:paddingBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pageTitle"
             tools:listitem="@layout/conversation_list_item" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

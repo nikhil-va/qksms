@@ -43,6 +43,10 @@
 
     <string name="main_drawer_open_cd">Open navigation drawer</string>
     <string name="main_title_selected">%d selected</string>
+    <string name="main_title_inbox">Messages</string>
+    <string name="main_menu_select_all">Select all</string>
+    <string name="main_menu_read_all">Mark all as read</string>
+    <string name="drawer_version">Version %s</string>
     <string name="main_menu_clear">Clear</string>
     <string name="main_menu_archive">Archive</string>
     <string name="main_menu_unarchive">Unarchive</string>
