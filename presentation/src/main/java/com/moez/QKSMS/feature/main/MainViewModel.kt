@@ -99,10 +99,6 @@ class MainViewModel @Inject constructor(
         disposables += billingManager.upgradeStatus
                 .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
 
-        // Show the rating UI
-        disposables += ratingManager.shouldShowRating
-                .subscribe { show -> newState { copy(showRating = show) } }
-
 
         // Migrate the preferences from 2.7.3
         migratePreferences.execute(Unit)

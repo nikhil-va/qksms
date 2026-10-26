@@ -102,11 +102,10 @@ class PlusActivity : QkThemedActivity(), PlusView {
         upgrade.text = getString(upgradeButtonExperiment.variant, state.upgradePrice, state.currency)
         upgradeDonate.text = getString(R.string.qksms_plus_upgrade_donate, state.upgradeDonatePrice, state.currency)
 
-        val fdroid = BuildConfig.FLAVOR == "noAnalytics"
-
-        free.setVisible(fdroid)
-        toUpgrade.setVisible(!fdroid && !state.upgraded)
-        upgraded.setVisible(!fdroid && state.upgraded)
+        // Every feature is unlocked, so there's nothing to buy or donate
+        free.setVisible(false)
+        toUpgrade.setVisible(false)
+        upgraded.setVisible(false)
 
         themes.isEnabled = state.upgraded
         schedule.isEnabled = state.upgraded

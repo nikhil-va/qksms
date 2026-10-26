@@ -28,7 +28,7 @@ android {
     flavorDimensions "analytics"
 
     defaultConfig {
-        applicationId "com.moez.QKSMS"
+        applicationId "com.nikhilva.qksms"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2218

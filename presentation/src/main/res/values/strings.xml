@@ -379,10 +379,10 @@
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">Apply</string>
 
-    <string name="about_developer" translatable="false">Moez Bhatti</string>
-    <string name="about_source" translatable="false">https://github.com/moezbhatti/qksms</string>
-    <string name="about_changelog" translatable="false">https://github.com/moezbhatti/qksms/releases</string>
-    <string name="about_contact" translatable="false">moez@qklabs.com</string>
+    <string name="about_developer" translatable="false">nikhil-va (fork of QKSMS by Moez Bhatti)</string>
+    <string name="about_source" translatable="false">https://github.com/nikhil-va/qksms</string>
+    <string name="about_changelog" translatable="false">https://github.com/nikhil-va/qksms/commits</string>
+    <string name="about_contact" translatable="false">https://github.com/nikhil-va/qksms/issues</string>
     <string name="about_license" translatable="false">GNU General Public License v3.0</string>
     <string name="about_copyright" translatable="false">© 2014–2019</string>
 

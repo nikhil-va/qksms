@@ -64,14 +64,8 @@ class BillingManagerImpl @Inject constructor(
             }
 
     private val purchaseListSubject = BehaviorSubject.create<List<Purchase>>()
-    override val upgradeStatus: Observable<Boolean> = purchaseListSubject
-            .map { purchases ->
-                purchases
-                        .filter { it.purchaseState == Purchase.PurchaseState.PURCHASED }
-                        .any { it.sku in skus }
-            }
-            .distinctUntilChanged()
-            .doOnNext { upgraded -> analyticsManager.setUserProperty("Upgraded", upgraded) }
+    // Every feature is unlocked in this build, whether or not anything was purchased
+    override val upgradeStatus: Observable<Boolean> = BehaviorSubject.createDefault(true)
 
     private val skus = listOf(BillingManager.SKU_PLUS, BillingManager.SKU_PLUS_DONATE)
     private val billingClient: BillingClient = BillingClient.newBuilder(context)

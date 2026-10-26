@@ -142,22 +142,22 @@ class Navigator @Inject constructor(
     }
 
     fun showDeveloper() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nikhil-va"))
         startActivityExternal(intent)
     }
 
     fun showSourceCode() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nikhil-va/qksms"))
         startActivityExternal(intent)
     }
 
     fun showChangelog() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms/releases"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nikhil-va/qksms/commits"))
         startActivityExternal(intent)
     }
 
     fun showLicense() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/moezbhatti/qksms/blob/master/LICENSE"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nikhil-va/qksms/blob/master/LICENSE"))
         startActivityExternal(intent)
     }
 
@@ -173,22 +173,11 @@ class Navigator @Inject constructor(
     }
 
     fun showDonation() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://bit.ly/QKSMSDonation"))
-        startActivityExternal(intent)
+        showSourceCode()
     }
 
     fun showRating() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.moez.QKSMS"))
-                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
-                        or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-                        or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-
-        try {
-            startActivityExternal(intent)
-        } catch (e: ActivityNotFoundException) {
-            val url = "http://play.google.com/store/apps/details?id=com.moez.QKSMS"
-            startActivityExternal(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }
+        showSourceCode()
     }
 
     /**
@@ -219,20 +208,7 @@ class Navigator @Inject constructor(
     }
 
     fun showSupport() {
-        val intent = Intent(Intent.ACTION_SENDTO)
-        intent.data = Uri.parse("mailto:")
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("moez@qklabs.com"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, "QKSMS Support")
-        intent.putExtra(Intent.EXTRA_TEXT, StringBuilder("\n\n")
-                .append("\n\n--- Please write your message above this line ---\n\n")
-                .append("Package: ${context.packageName}\n")
-                .append("Version: ${BuildConfig.VERSION_NAME}\n")
-                .append("Device: ${Build.BRAND} ${Build.MODEL}\n")
-                .append("SDK: ${Build.VERSION.SDK_INT}\n")
-                .append("Upgraded"
-                        .takeIf { BuildConfig.FLAVOR != "noAnalytics" }
-                        .takeIf { billingManager.upgradeStatus.blockingFirst() } ?: "")
-                .toString())
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nikhil-va/qksms/issues"))
         startActivityExternal(intent)
     }
 
@@ -240,7 +216,7 @@ class Navigator @Inject constructor(
         analyticsManager.track("Clicked Invite")
         Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, "http://qklabs.com/download")
+                .putExtra(Intent.EXTRA_TEXT, "https://github.com/nikhil-va/qksms")
                 .let { Intent.createChooser(it, null) }
                 .let(::startActivityExternal)
     }
