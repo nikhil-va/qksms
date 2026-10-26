@@ -52,3 +52,8 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+# Real QKSMS backups and bank SMS tool output (personal data)
+backup-*.json
+tools/bank-sms/input/
+tools/bank-sms/out/
