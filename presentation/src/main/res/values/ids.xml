@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- View tag holding ViewFinder's cache of looked-up views -->
+    <item name="view_finder_cache" type="id" />
+</resources>

@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver
 import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
+import com.moez.QKSMS.BuildConfig
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.CrashlyticsTree
 import com.moez.QKSMS.common.util.FileLoggingTree
@@ -97,11 +98,17 @@ class QKApplication : Application(), HasAndroidInjector {
 
         EmojiCompat.init(FontRequestEmojiCompatConfig(this, fontRequest))
 
-        Timber.plant(Timber.DebugTree(), CrashlyticsTree(), fileLoggingTree)
+        Timber.plant(CrashlyticsTree(), fileLoggingTree)
 
-        RxDogTag.builder()
-                .configureWith(AutoDisposeConfigurer::configure)
-                .install()
+        // Logcat logging and RxDogTag's better Rx stack traces cost time on every log line and every Rx subscriber,
+        // so they're only enabled in debug builds
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+
+            RxDogTag.builder()
+                    .configureWith(AutoDisposeConfigurer::configure)
+                    .install()
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

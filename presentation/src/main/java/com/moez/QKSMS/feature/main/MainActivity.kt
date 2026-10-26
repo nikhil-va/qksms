@@ -152,6 +152,7 @@ class MainActivity : QkThemedActivity(), MainView {
 
         itemTouchCallback.adapter = conversationsAdapter
         conversationsAdapter.autoScrollToStart(recyclerView)
+        recyclerView.setHasFixedSize(true)
 
         // Like Google Messages, collapse the FAB to an icon while scrolling down the list
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
