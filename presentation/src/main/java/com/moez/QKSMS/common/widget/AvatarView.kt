@@ -30,7 +30,7 @@ import com.moez.QKSMS.common.util.extensions.setTint
 import com.moez.QKSMS.injection.appComponent
 import com.moez.QKSMS.model.Recipient
 import com.moez.QKSMS.util.GlideApp
-import kotlinx.android.synthetic.main.avatar_view.view.*
+import com.moez.QKSMS.synthetic.avatar_view.view.*
 import javax.inject.Inject
 
 class AvatarView @JvmOverloads constructor(

@@ -33,8 +33,8 @@ import com.moez.QKSMS.common.util.DateFormatter
 import com.moez.QKSMS.common.util.extensions.setVisible
 import com.moez.QKSMS.extensions.removeAccents
 import com.moez.QKSMS.model.SearchResult
-import kotlinx.android.synthetic.main.search_list_item.*
-import kotlinx.android.synthetic.main.search_list_item.view.*
+import com.moez.QKSMS.synthetic.search_list_item.*
+import com.moez.QKSMS.synthetic.search_list_item.view.*
 import javax.inject.Inject
 
 class SearchAdapter @Inject constructor(

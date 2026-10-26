@@ -31,8 +31,8 @@ import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.model.Conversation
 import com.moez.QKSMS.util.Preferences
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.blocked_list_item.*
-import kotlinx.android.synthetic.main.blocked_list_item.view.*
+import com.moez.QKSMS.synthetic.blocked_list_item.*
+import com.moez.QKSMS.synthetic.blocked_list_item.view.*
 import javax.inject.Inject
 
 class BlockedMessagesAdapter @Inject constructor(

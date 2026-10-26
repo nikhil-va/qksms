@@ -31,8 +31,8 @@ import com.moez.QKSMS.common.util.FontProvider
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.common.util.extensions.setTint
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.collapsing_toolbar.*
-import kotlinx.android.synthetic.main.scheduled_activity.*
+import com.moez.QKSMS.synthetic.collapsing_toolbar.*
+import com.moez.QKSMS.synthetic.scheduled_activity.*
 import javax.inject.Inject
 
 

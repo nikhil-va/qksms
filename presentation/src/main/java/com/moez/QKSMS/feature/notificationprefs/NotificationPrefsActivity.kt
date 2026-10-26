@@ -40,8 +40,8 @@ import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.notification_prefs_activity.*
-import kotlinx.android.synthetic.main.settings_switch_widget.view.*
+import com.moez.QKSMS.synthetic.notification_prefs_activity.*
+import com.moez.QKSMS.synthetic.settings_switch_widget.view.*
 import javax.inject.Inject
 
 class NotificationPrefsActivity : QkThemedActivity(), NotificationPrefsView {

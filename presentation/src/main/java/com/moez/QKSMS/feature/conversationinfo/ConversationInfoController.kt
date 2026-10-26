@@ -37,7 +37,7 @@ import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.conversation_info_controller.*
+import com.moez.QKSMS.synthetic.conversation_info_controller.*
 import javax.inject.Inject
 
 class ConversationInfoController(

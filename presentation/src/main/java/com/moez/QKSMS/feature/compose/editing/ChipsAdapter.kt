@@ -32,7 +32,7 @@ import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.model.Recipient
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.contact_chip.*
+import com.moez.QKSMS.synthetic.contact_chip.*
 import javax.inject.Inject
 
 class ChipsAdapter @Inject constructor() : QkAdapter<Recipient>() {

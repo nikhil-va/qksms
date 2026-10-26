@@ -25,7 +25,7 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkThemedActivity
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.container_activity.*
+import com.moez.QKSMS.synthetic.container_activity.*
 
 class BlockingActivity : QkThemedActivity() {
 

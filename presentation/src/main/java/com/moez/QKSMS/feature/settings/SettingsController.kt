@@ -58,10 +58,10 @@ import io.reactivex.subjects.Subject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import kotlinx.android.synthetic.main.settings_controller.*
-import kotlinx.android.synthetic.main.settings_controller.view.*
-import kotlinx.android.synthetic.main.settings_switch_widget.view.*
-import kotlinx.android.synthetic.main.settings_theme_widget.*
+import com.moez.QKSMS.synthetic.settings_controller.*
+import com.moez.QKSMS.synthetic.settings_controller.view.*
+import com.moez.QKSMS.synthetic.settings_switch_widget.view.*
+import com.moez.QKSMS.synthetic.settings_theme_widget.*
 import javax.inject.Inject
 import kotlin.coroutines.resume
 

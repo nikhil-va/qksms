@@ -42,9 +42,9 @@ import com.moez.QKSMS.repository.BackupRepository
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.backup_controller.*
-import kotlinx.android.synthetic.main.backup_list_dialog.view.*
-import kotlinx.android.synthetic.main.preference_view.view.*
+import com.moez.QKSMS.synthetic.backup_controller.*
+import com.moez.QKSMS.synthetic.backup_list_dialog.view.*
+import com.moez.QKSMS.synthetic.preference_view.view.*
 import javax.inject.Inject
 
 class BackupController : QkController<BackupView, BackupState, BackupPresenter>(), BackupView {

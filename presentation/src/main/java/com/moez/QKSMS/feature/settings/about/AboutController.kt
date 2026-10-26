@@ -26,7 +26,7 @@ import com.moez.QKSMS.common.base.QkController
 import com.moez.QKSMS.common.widget.PreferenceView
 import com.moez.QKSMS.injection.appComponent
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.about_controller.*
+import com.moez.QKSMS.synthetic.about_controller.*
 import javax.inject.Inject
 
 class AboutController : QkController<AboutView, Unit, AboutPresenter>(), AboutView {

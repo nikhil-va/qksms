@@ -38,7 +38,7 @@ import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.gallery_activity.*
+import com.moez.QKSMS.synthetic.gallery_activity.*
 import javax.inject.Inject
 
 class GalleryActivity : QkActivity(), GalleryView {

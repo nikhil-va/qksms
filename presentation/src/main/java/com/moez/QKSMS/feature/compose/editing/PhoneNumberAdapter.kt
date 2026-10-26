@@ -24,7 +24,7 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkAdapter
 import com.moez.QKSMS.common.base.QkViewHolder
 import com.moez.QKSMS.model.PhoneNumber
-import kotlinx.android.synthetic.main.contact_number_list_item.*
+import com.moez.QKSMS.synthetic.contact_number_list_item.*
 
 class PhoneNumberAdapter : QkAdapter<PhoneNumber>() {
 

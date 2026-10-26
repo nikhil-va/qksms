@@ -29,7 +29,7 @@ import com.moez.QKSMS.common.util.extensions.resolveThemeAttribute
 import com.moez.QKSMS.common.util.extensions.resolveThemeColorStateList
 import com.moez.QKSMS.common.util.extensions.setVisible
 import com.moez.QKSMS.injection.appComponent
-import kotlinx.android.synthetic.main.preference_view.view.*
+import com.moez.QKSMS.synthetic.preference_view.view.*
 
 class PreferenceView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

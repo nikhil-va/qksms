@@ -16,9 +16,9 @@ import com.moez.QKSMS.feature.conversationinfo.ConversationInfoItem.*
 import com.moez.QKSMS.util.GlideApp
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.conversation_info_settings.*
-import kotlinx.android.synthetic.main.conversation_media_list_item.*
-import kotlinx.android.synthetic.main.conversation_recipient_list_item.*
+import com.moez.QKSMS.synthetic.conversation_info_settings.*
+import com.moez.QKSMS.synthetic.conversation_media_list_item.*
+import com.moez.QKSMS.synthetic.conversation_recipient_list_item.*
 import javax.inject.Inject
 
 class ConversationInfoAdapter @Inject constructor(

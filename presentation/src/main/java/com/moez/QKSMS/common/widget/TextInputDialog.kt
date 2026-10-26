@@ -23,7 +23,7 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.moez.QKSMS.R
-import kotlinx.android.synthetic.main.text_input_dialog.view.*
+import com.moez.QKSMS.synthetic.text_input_dialog.view.*
 
 class TextInputDialog(context: Activity, hint: String, listener: (String) -> Unit) : AlertDialog(context) {
 

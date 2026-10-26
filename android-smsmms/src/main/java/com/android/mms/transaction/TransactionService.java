@@ -519,7 +519,7 @@ public class TransactionService extends Service implements Observer {
             }
         }
 
-        int result = mConnMgr.startUsingNetworkFeature(ConnectivityManager.TYPE_MOBILE, "enableMMS");
+        int result = invokeNetworkFeature("startUsingNetworkFeature");
 
         Timber.v("beginMmsConnectivity: result=" + result);
 
@@ -533,6 +533,25 @@ public class TransactionService extends Service implements Observer {
         throw new IOException("Cannot establish MMS connectivity");
     }
 
+    /**
+     * Calls ConnectivityManager.startUsingNetworkFeature / stopUsingNetworkFeature for the MMS feature.
+     * Both were removed from the public SDK in API 23, so they're called by reflection.
+     */
+    private int invokeNetworkFeature(String methodName) {
+        try {
+            Object result = ConnectivityManager.class
+                    .getMethod(methodName, int.class, String.class)
+                    .invoke(mConnMgr, ConnectivityManager.TYPE_MOBILE, "enableMMS");
+            return (Integer) result;
+        } catch (java.lang.reflect.InvocationTargetException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) throw (RuntimeException) cause;
+            throw new RuntimeException(cause);
+        } catch (ReflectiveOperationException e) {
+            throw new UnsupportedOperationException(methodName + " is not available", e);
+        }
+    }
+
     protected void endMmsConnectivity() {
         try {
             Timber.v("endMmsConnectivity");
@@ -540,9 +559,7 @@ public class TransactionService extends Service implements Observer {
             // cancel timer for renewal of lease
             mServiceHandler.removeMessages(EVENT_CONTINUE_MMS_CONNECTIVITY);
             if (mConnMgr != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                mConnMgr.stopUsingNetworkFeature(
-                        ConnectivityManager.TYPE_MOBILE,
-                        "enableMMS");
+                invokeNetworkFeature("stopUsingNetworkFeature");
             }
         } finally {
             releaseWakeLock();

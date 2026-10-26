@@ -23,12 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.mms.ContentType
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkRealmAdapter
@@ -39,9 +34,9 @@ import com.moez.QKSMS.model.MmsPart
 import com.moez.QKSMS.util.GlideApp
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.gallery_image_page.*
-import kotlinx.android.synthetic.main.gallery_image_page.view.*
-import kotlinx.android.synthetic.main.gallery_video_page.*
+import com.moez.QKSMS.synthetic.gallery_image_page.*
+import com.moez.QKSMS.synthetic.gallery_image_page.view.*
+import com.moez.QKSMS.synthetic.gallery_video_page.*
 import java.util.*
 import javax.inject.Inject
 
@@ -108,15 +103,12 @@ class GalleryPagerAdapter @Inject constructor(private val context: Context) : Qk
             }
 
             VIEW_TYPE_VIDEO -> {
-                val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(null)
-                val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
-                val exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector)
+                val exoPlayer = ExoPlayer.Builder(context).build()
                 holder.video.player = exoPlayer
                 exoPlayers.add(exoPlayer)
 
-                val dataSourceFactory = DefaultDataSourceFactory(context, Util.getUserAgent(context, "QKSMS"))
-                val videoSource = ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(part.getUri())
-                exoPlayer?.prepare(videoSource)
+                exoPlayer.setMediaItem(MediaItem.fromUri(part.getUri()))
+                exoPlayer.prepare()
             }
         }
     }

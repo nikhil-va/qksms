@@ -34,7 +34,7 @@ import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.swipe_actions_controller.*
+import com.moez.QKSMS.synthetic.swipe_actions_controller.*
 import javax.inject.Inject
 
 class SwipeActionsController : QkController<SwipeActionsView, SwipeActionsState, SwipeActionsPresenter>(), SwipeActionsView {

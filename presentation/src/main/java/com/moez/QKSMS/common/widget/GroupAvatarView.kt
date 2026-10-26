@@ -29,7 +29,7 @@ import com.moez.QKSMS.common.util.extensions.getColorCompat
 import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.model.Recipient
-import kotlinx.android.synthetic.main.group_avatar_view.view.*
+import com.moez.QKSMS.synthetic.group_avatar_view.view.*
 
 class GroupAvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

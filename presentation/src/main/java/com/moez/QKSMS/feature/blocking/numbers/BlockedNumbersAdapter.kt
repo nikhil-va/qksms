@@ -26,8 +26,8 @@ import com.moez.QKSMS.common.base.QkViewHolder
 import com.moez.QKSMS.model.BlockedNumber
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.blocked_number_list_item.*
-import kotlinx.android.synthetic.main.blocked_number_list_item.view.*
+import com.moez.QKSMS.synthetic.blocked_number_list_item.*
+import com.moez.QKSMS.synthetic.blocked_number_list_item.view.*
 
 class BlockedNumbersAdapter : QkRealmAdapter<BlockedNumber>() {
 

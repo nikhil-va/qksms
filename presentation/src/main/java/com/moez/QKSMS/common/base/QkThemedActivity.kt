@@ -44,7 +44,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.toolbar.*
+import com.moez.QKSMS.synthetic.toolbar.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

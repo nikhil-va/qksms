@@ -36,7 +36,7 @@ import com.uber.autodispose.android.ViewScopeProvider
 import com.uber.autodispose.autoDisposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.tab_view.view.*
+import com.moez.QKSMS.synthetic.tab_view.view.*
 import javax.inject.Inject
 
 class PagerTitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {

@@ -30,7 +30,7 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.extensions.animateLayoutChanges
 import com.moez.QKSMS.common.util.extensions.resolveThemeAttribute
 import com.moez.QKSMS.common.util.extensions.setVisible
-import kotlinx.android.synthetic.main.blocking_manager_preference_view.view.*
+import com.moez.QKSMS.synthetic.blocking_manager_preference_view.view.*
 
 class BlockingManagerPreferenceView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

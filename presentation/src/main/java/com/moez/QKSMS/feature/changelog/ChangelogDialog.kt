@@ -26,7 +26,7 @@ import com.moez.QKSMS.feature.main.MainActivity
 import com.moez.QKSMS.manager.ChangelogManager
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.changelog_dialog.view.*
+import com.moez.QKSMS.synthetic.changelog_dialog.view.*
 
 class ChangelogDialog(activity: MainActivity) {
 

@@ -31,7 +31,7 @@ import com.moez.QKSMS.common.util.extensions.resolveThemeAttribute
 import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.common.util.extensions.setVisible
 import com.moez.QKSMS.injection.appComponent
-import kotlinx.android.synthetic.main.radio_preference_view.view.*
+import com.moez.QKSMS.synthetic.radio_preference_view.view.*
 import javax.inject.Inject
 
 class RadioPreferenceView @JvmOverloads constructor(

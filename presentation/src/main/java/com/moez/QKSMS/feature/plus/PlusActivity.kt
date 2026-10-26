@@ -37,9 +37,9 @@ import com.moez.QKSMS.common.widget.PreferenceView
 import com.moez.QKSMS.feature.plus.experiment.UpgradeButtonExperiment
 import com.moez.QKSMS.manager.BillingManager
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.collapsing_toolbar.*
-import kotlinx.android.synthetic.main.preference_view.view.*
-import kotlinx.android.synthetic.main.qksms_plus_activity.*
+import com.moez.QKSMS.synthetic.collapsing_toolbar.*
+import com.moez.QKSMS.synthetic.preference_view.view.*
+import com.moez.QKSMS.synthetic.qksms_plus_activity.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

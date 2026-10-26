@@ -35,8 +35,8 @@ import com.moez.QKSMS.repository.ContactRepository
 import com.moez.QKSMS.util.PhoneNumberUtils
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.scheduled_message_list_item.*
-import kotlinx.android.synthetic.main.scheduled_message_list_item.view.*
+import com.moez.QKSMS.synthetic.scheduled_message_list_item.*
+import com.moez.QKSMS.synthetic.scheduled_message_list_item.view.*
 import javax.inject.Inject
 
 class ScheduledMessageAdapter @Inject constructor(

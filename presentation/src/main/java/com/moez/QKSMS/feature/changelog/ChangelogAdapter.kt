@@ -26,7 +26,7 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkAdapter
 import com.moez.QKSMS.common.base.QkViewHolder
 import com.moez.QKSMS.manager.ChangelogManager
-import kotlinx.android.synthetic.main.changelog_list_item.*
+import com.moez.QKSMS.synthetic.changelog_list_item.*
 
 class ChangelogAdapter(private val context: Context) : QkAdapter<ChangelogAdapter.ChangelogItem>() {
 

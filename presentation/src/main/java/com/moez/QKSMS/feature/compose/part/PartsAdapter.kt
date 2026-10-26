@@ -31,7 +31,7 @@ import com.moez.QKSMS.feature.compose.BubbleUtils.canGroup
 import com.moez.QKSMS.model.Message
 import com.moez.QKSMS.model.MmsPart
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.message_list_item_in.*
+import com.moez.QKSMS.synthetic.message_list_item_in.*
 import javax.inject.Inject
 
 class PartsAdapter @Inject constructor(

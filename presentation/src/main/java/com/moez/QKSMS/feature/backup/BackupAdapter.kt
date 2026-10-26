@@ -29,7 +29,7 @@ import com.moez.QKSMS.common.util.DateFormatter
 import com.moez.QKSMS.model.BackupFile
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.backup_list_item.*
+import com.moez.QKSMS.synthetic.backup_list_item.*
 import javax.inject.Inject
 
 class BackupAdapter @Inject constructor(

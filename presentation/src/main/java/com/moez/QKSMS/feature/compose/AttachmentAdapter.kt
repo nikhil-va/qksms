@@ -35,9 +35,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.attachment_contact_list_item.*
-import kotlinx.android.synthetic.main.attachment_image_list_item.*
-import kotlinx.android.synthetic.main.attachment_image_list_item.view.*
+import com.moez.QKSMS.synthetic.attachment_contact_list_item.*
+import com.moez.QKSMS.synthetic.attachment_image_list_item.*
+import com.moez.QKSMS.synthetic.attachment_image_list_item.view.*
 import javax.inject.Inject
 
 class AttachmentAdapter @Inject constructor(

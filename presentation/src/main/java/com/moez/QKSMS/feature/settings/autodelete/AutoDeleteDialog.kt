@@ -23,7 +23,7 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.moez.QKSMS.R
-import kotlinx.android.synthetic.main.settings_auto_delete_dialog.view.*
+import com.moez.QKSMS.synthetic.settings_auto_delete_dialog.view.*
 
 class AutoDeleteDialog(context: Activity, listener: (Int) -> Unit) : AlertDialog(context) {
 

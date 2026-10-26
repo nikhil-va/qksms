@@ -26,8 +26,8 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkAdapter
 import com.moez.QKSMS.common.base.QkViewHolder
 import com.moez.QKSMS.util.GlideApp
-import kotlinx.android.synthetic.main.attachment_image_list_item.view.*
-import kotlinx.android.synthetic.main.scheduled_message_image_list_item.*
+import com.moez.QKSMS.synthetic.attachment_image_list_item.view.*
+import com.moez.QKSMS.synthetic.scheduled_message_image_list_item.*
 import javax.inject.Inject
 
 class ScheduledMessageAttachmentAdapter @Inject constructor(

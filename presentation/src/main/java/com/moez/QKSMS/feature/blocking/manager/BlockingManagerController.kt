@@ -15,8 +15,8 @@ import com.moez.QKSMS.util.Preferences
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.blocking_manager_controller.*
-import kotlinx.android.synthetic.main.blocking_manager_list_option.view.*
+import com.moez.QKSMS.synthetic.blocking_manager_controller.*
+import com.moez.QKSMS.synthetic.blocking_manager_list_option.view.*
 import javax.inject.Inject
 
 class BlockingManagerController : QkController<BlockingManagerView, BlockingManagerState, BlockingManagerPresenter>(),

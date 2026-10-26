@@ -25,7 +25,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.toolbar.*
+import com.moez.QKSMS.synthetic.toolbar.*
 
 abstract class QkActivity : AppCompatActivity() {
 

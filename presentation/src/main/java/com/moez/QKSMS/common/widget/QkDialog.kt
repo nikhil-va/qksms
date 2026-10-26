@@ -25,7 +25,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.base.QkAdapter
-import kotlinx.android.synthetic.main.qk_dialog.view.*
+import com.moez.QKSMS.synthetic.qk_dialog.view.*
 
 class QkDialog(private val context: Activity) : AlertDialog(context) {
 

@@ -29,7 +29,7 @@ import com.moez.QKSMS.extensions.isVideo
 import com.moez.QKSMS.model.Message
 import com.moez.QKSMS.model.MmsPart
 import com.moez.QKSMS.util.GlideApp
-import kotlinx.android.synthetic.main.mms_preview_list_item.*
+import com.moez.QKSMS.synthetic.mms_preview_list_item.*
 import javax.inject.Inject
 
 class MediaBinder @Inject constructor(colors: Colors, private val context: Context) : PartBinder() {

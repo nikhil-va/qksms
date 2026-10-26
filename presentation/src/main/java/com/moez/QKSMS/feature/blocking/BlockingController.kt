@@ -30,8 +30,8 @@ import com.moez.QKSMS.feature.blocking.manager.BlockingManagerController
 import com.moez.QKSMS.feature.blocking.messages.BlockedMessagesController
 import com.moez.QKSMS.feature.blocking.numbers.BlockedNumbersController
 import com.moez.QKSMS.injection.appComponent
-import kotlinx.android.synthetic.main.blocking_controller.*
-import kotlinx.android.synthetic.main.settings_switch_widget.view.*
+import com.moez.QKSMS.synthetic.blocking_controller.*
+import com.moez.QKSMS.synthetic.settings_switch_widget.view.*
 import javax.inject.Inject
 
 class BlockingController : QkController<BlockingView, BlockingState, BlockingPresenter>(), BlockingView {

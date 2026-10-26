@@ -65,7 +65,7 @@ import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.compose_activity.*
+import com.moez.QKSMS.synthetic.compose_activity.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -392,8 +392,8 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        cameraDestination = savedInstanceState?.getParcelable(CameraDestinationKey)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        cameraDestination = savedInstanceState.getParcelable(CameraDestinationKey)
         super.onRestoreInstanceState(savedInstanceState)
     }
 

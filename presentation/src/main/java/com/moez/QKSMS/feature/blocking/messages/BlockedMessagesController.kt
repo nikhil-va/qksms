@@ -31,8 +31,8 @@ import com.moez.QKSMS.feature.blocking.BlockingDialog
 import com.moez.QKSMS.injection.appComponent
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.blocked_messages_controller.*
-import kotlinx.android.synthetic.main.container_activity.*
+import com.moez.QKSMS.synthetic.blocked_messages_controller.*
+import com.moez.QKSMS.synthetic.container_activity.*
 import javax.inject.Inject
 
 class BlockedMessagesController : QkController<BlockedMessagesView, BlockedMessagesState, BlockedMessagesPresenter>(),

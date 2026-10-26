@@ -33,8 +33,8 @@ import com.moez.QKSMS.common.util.extensions.setVisible
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.menu_list_item.*
-import kotlinx.android.synthetic.main.menu_list_item.view.*
+import com.moez.QKSMS.synthetic.menu_list_item.*
+import com.moez.QKSMS.synthetic.menu_list_item.view.*
 import javax.inject.Inject
 
 data class MenuItem(val title: String, val actionId: Int)

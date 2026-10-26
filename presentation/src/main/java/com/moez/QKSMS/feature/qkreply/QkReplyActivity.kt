@@ -40,7 +40,7 @@ import com.moez.QKSMS.feature.compose.MessagesAdapter
 import dagger.android.AndroidInjection
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.qkreply_activity.*
+import com.moez.QKSMS.synthetic.qkreply_activity.*
 import javax.inject.Inject
 
 class QkReplyActivity : QkThemedActivity(), QkReplyView {

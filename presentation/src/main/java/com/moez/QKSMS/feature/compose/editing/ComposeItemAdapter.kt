@@ -38,8 +38,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.contact_list_item.*
-import kotlinx.android.synthetic.main.contact_list_item.view.*
+import com.moez.QKSMS.synthetic.contact_list_item.*
+import com.moez.QKSMS.synthetic.contact_list_item.view.*
 import javax.inject.Inject
 
 class ComposeItemAdapter @Inject constructor(

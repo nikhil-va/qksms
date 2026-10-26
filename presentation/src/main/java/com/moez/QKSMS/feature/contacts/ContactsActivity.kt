@@ -44,7 +44,7 @@ import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.contacts_activity.*
+import com.moez.QKSMS.synthetic.contacts_activity.*
 import javax.inject.Inject
 
 class ContactsActivity : QkThemedActivity(), ContactsContract {
