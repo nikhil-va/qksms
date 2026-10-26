@@ -79,7 +79,7 @@
 
     <style name="CollapsingToolbarCollapsedText">
         <item name="textSize">toolbar</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="CollapsingToolbarExpandedText">

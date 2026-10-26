@@ -87,12 +87,19 @@ class TextViewStyler @Inject constructor(
                     SIZE_PRIMARY -> 16f
                     SIZE_SECONDARY -> 14f
                     SIZE_TERTIARY -> 12f
-                    SIZE_TOOLBAR -> 20f
+                    SIZE_TOOLBAR -> 22f
                     SIZE_DIALOG -> 18f
                     SIZE_EMOJI -> 32f
                     else -> textSize / paint.density
                 }
             }
+        }
+    }
+
+    private val mediumTypeface: Typeface by lazy {
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> Typeface.create(Typeface.DEFAULT, 500, false)
+            else -> Typeface.create("sans-serif-medium", Typeface.NORMAL)
         }
     }
 
@@ -104,6 +111,9 @@ class TextViewStyler @Inject constructor(
             fontProvider.getLato { lato ->
                 textView.setTypeface(lato, textView.typeface?.style ?: Typeface.NORMAL)
             }
+        } else if (textView.typeface?.isBold == true) {
+            // Google's apps use the medium weight of the system font where this app used bold
+            textView.typeface = mediumTypeface
         }
 
         when (textView) {
@@ -173,11 +183,11 @@ class TextViewStyler @Inject constructor(
             }
 
             SIZE_TOOLBAR -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 18f
-                Preferences.TEXT_SIZE_NORMAL -> 20f
-                Preferences.TEXT_SIZE_LARGE -> 22f
-                Preferences.TEXT_SIZE_LARGER -> 26f
-                else -> 20f
+                Preferences.TEXT_SIZE_SMALL -> 20f
+                Preferences.TEXT_SIZE_NORMAL -> 22f
+                Preferences.TEXT_SIZE_LARGE -> 24f
+                Preferences.TEXT_SIZE_LARGER -> 28f
+                else -> 22f
             }
 
             SIZE_DIALOG -> textView.textSize = when (textSizePref) {

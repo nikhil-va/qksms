@@ -97,7 +97,8 @@ class Preferences @Inject constructor(
     val nightEnd = rxPrefs.getString("nightEnd", "6:00")
     val black = rxPrefs.getBoolean("black", false)
     val autoColor = rxPrefs.getBoolean("autoColor", true)
-    val systemFont = rxPrefs.getBoolean("systemFont", false)
+    // On by default, for the stock Android look; Lato is opt-in
+    val systemFont = rxPrefs.getBoolean("systemFont", true)
     val textSize = rxPrefs.getInteger("textSize", TEXT_SIZE_NORMAL)
     val blockingManager = rxPrefs.getInteger("blockingManager", BLOCKING_MANAGER_QKSMS)
     val drop = rxPrefs.getBoolean("drop", false)

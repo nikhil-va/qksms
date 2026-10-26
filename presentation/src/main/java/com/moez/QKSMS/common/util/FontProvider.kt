@@ -27,12 +27,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FontProvider @Inject constructor(context: Context) {
+class FontProvider @Inject constructor(private val context: Context) {
 
     private var lato: Typeface? = null
+    private var requested = false
     private val pendingCallbacks = ArrayList<(Typeface) -> Unit>()
 
-    init {
+    private fun requestLato() {
+        requested = true
         ResourcesCompat.getFont(context, R.font.lato, object : ResourcesCompat.FontCallback() {
             override fun onFontRetrievalFailed(reason: Int) {
                 Timber.w("Font retrieval failed: $reason")
@@ -49,6 +51,7 @@ class FontProvider @Inject constructor(context: Context) {
 
     fun getLato(callback: (Typeface) -> Unit) {
         lato?.run(callback) ?: pendingCallbacks.add(callback)
+        if (lato == null && !requested) requestLato()
     }
 
 }
