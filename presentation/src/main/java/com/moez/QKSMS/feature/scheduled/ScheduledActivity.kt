@@ -27,7 +27,6 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.QkDialog
 import com.moez.QKSMS.common.base.QkThemedActivity
-import com.moez.QKSMS.common.util.FontProvider
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.common.util.extensions.setTint
 import dagger.android.AndroidInjection
@@ -39,14 +38,12 @@ import javax.inject.Inject
 class ScheduledActivity : QkThemedActivity(), ScheduledView {
 
     @Inject lateinit var dialog: QkDialog
-    @Inject lateinit var fontProvider: FontProvider
     @Inject lateinit var messageAdapter: ScheduledMessageAdapter
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override val messageClickIntent by lazy { messageAdapter.clicks }
     override val messageMenuIntent by lazy { dialog.adapter.menuItemClicks }
     override val composeIntent by lazy { compose.clicks() }
-    override val upgradeIntent by lazy { upgrade.clicks() }
 
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[ScheduledViewModel::class.java] }
 
@@ -57,14 +54,6 @@ class ScheduledActivity : QkThemedActivity(), ScheduledView {
         setTitle(R.string.scheduled_title)
         showBackButton(true)
         viewModel.bindView(this)
-
-        if (!prefs.systemFont.get()) {
-            fontProvider.getLato { lato ->
-                val typeface = Typeface.create(lato, Typeface.BOLD)
-                collapsingToolbar.setCollapsedTitleTypeface(typeface)
-                collapsingToolbar.setExpandedTitleTypeface(typeface)
-            }
-        }
 
         dialog.title = getString(R.string.scheduled_options_title)
         dialog.adapter.setData(R.array.scheduled_options)
@@ -77,17 +66,11 @@ class ScheduledActivity : QkThemedActivity(), ScheduledView {
             sampleMessage.setTextColor(theme.textPrimary)
             compose.setTint(theme.textPrimary)
             compose.setBackgroundTint(theme.theme)
-            upgrade.setBackgroundTint(theme.theme)
-            upgradeIcon.setTint(theme.textPrimary)
-            upgradeLabel.setTextColor(theme.textPrimary)
         }
     }
 
     override fun render(state: ScheduledState) {
         messageAdapter.updateData(state.scheduledMessages)
-
-        compose.isVisible = state.upgraded
-        upgrade.isVisible = !state.upgraded
     }
 
     override fun showMessageOptions() {

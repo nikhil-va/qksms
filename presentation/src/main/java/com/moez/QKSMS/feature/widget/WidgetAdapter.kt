@@ -34,6 +34,7 @@ import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.DateFormatter
 import com.moez.QKSMS.common.util.extensions.dpToPx
 import com.moez.QKSMS.common.util.extensions.getColorCompat
+import com.moez.QKSMS.common.util.extensions.isSystemNightMode
 import com.moez.QKSMS.feature.compose.ComposeActivity
 import com.moez.QKSMS.feature.main.MainActivity
 import com.moez.QKSMS.injection.appComponent
@@ -64,15 +65,10 @@ class WidgetAdapter(intent: Intent) : RemoteViewsService.RemoteViewsFactory {
     private var conversations: List<Conversation> = listOf()
     private val appWidgetManager by lazy { AppWidgetManager.getInstance(context) }
 
-    private val night get() = prefs.night.get()
-    private val black get() = prefs.black.get()
+    private val night get() = context.isSystemNightMode()
     private val theme get() = colors.theme()
     private val background
-        get() = context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
-            else -> R.color.white
-        })
+        get() = context.getColorCompat(if (night) R.color.backgroundDark else R.color.white)
     private val textPrimary
         get() = context.getColorCompat(if (night) R.color.textPrimaryDark else R.color.textPrimary)
     private val textSecondary

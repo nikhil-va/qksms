@@ -35,7 +35,6 @@ import com.moez.QKSMS.interactor.MigratePreferences
 import com.moez.QKSMS.interactor.SyncContacts
 import com.moez.QKSMS.interactor.SyncMessages
 import com.moez.QKSMS.listener.ContactAddedListener
-import com.moez.QKSMS.manager.BillingManager
 import com.moez.QKSMS.manager.ChangelogManager
 import com.moez.QKSMS.manager.PermissionManager
 import com.moez.QKSMS.manager.RatingManager
@@ -58,7 +57,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    billingManager: BillingManager,
     contactAddedListener: ContactAddedListener,
     markAllSeen: MarkAllSeen,
     migratePreferences: MigratePreferences,
@@ -95,9 +93,6 @@ class MainViewModel @Inject constructor(
                 .distinctUntilChanged()
                 .subscribe { syncing -> newState { copy(syncing = syncing) } }
 
-        // Update the upgraded status
-        disposables += billingManager.upgradeStatus
-                .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
 
 
         // Migrate the preferences from 2.7.3
@@ -213,7 +208,6 @@ class MainViewModel @Inject constructor(
                     prefs.keyChanges
                             .filter { key -> key.contains("theme") }
                             .map { true }
-                            .mergeWith(prefs.autoColor.asObservable().skip(1))
                             .doOnNext { view.themeChanged() }
                             .takeUntil(view.activityResumedIntent.filter { resumed -> resumed })
                 }
@@ -259,7 +253,6 @@ class MainViewModel @Inject constructor(
                         NavItem.SCHEDULED -> navigator.showScheduled()
                         NavItem.BLOCKING -> navigator.showBlockedConversations()
                         NavItem.SETTINGS -> navigator.showSettings()
-                        NavItem.PLUS -> navigator.showQksmsPlusActivity("main_menu")
                         NavItem.HELP -> navigator.showSupport()
                         NavItem.INVITE -> navigator.showInvite()
                         else -> Unit
@@ -363,13 +356,6 @@ class MainViewModel @Inject constructor(
                 }
                 .autoDisposable(view.scope())
                 .subscribe()
-
-        view.plusBannerIntent
-                .autoDisposable(view.scope())
-                .subscribe {
-                    newState { copy(drawerOpen = false) }
-                    navigator.showQksmsPlusActivity("main_banner")
-                }
 
         view.rateIntent
                 .autoDisposable(view.scope())

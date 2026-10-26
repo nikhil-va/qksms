@@ -38,7 +38,6 @@ import com.moez.QKSMS.feature.conversationinfo.injection.ConversationInfoCompone
 import com.moez.QKSMS.feature.settings.SettingsController
 import com.moez.QKSMS.feature.settings.about.AboutController
 import com.moez.QKSMS.feature.settings.swipe.SwipeActionsController
-import com.moez.QKSMS.feature.themepicker.injection.ThemePickerComponent
 import com.moez.QKSMS.feature.widget.WidgetAdapter
 import com.moez.QKSMS.injection.android.ActivityBuilderModule
 import com.moez.QKSMS.injection.android.BroadcastReceiverBuilderModule
@@ -57,7 +56,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun conversationInfoBuilder(): ConversationInfoComponent.Builder
-    fun themePickerBuilder(): ThemePickerComponent.Builder
 
     fun inject(application: QKApplication)
 

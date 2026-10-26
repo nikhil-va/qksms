@@ -22,7 +22,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.moez.QKSMS.R
+import com.moez.QKSMS.common.util.extensions.setPadding
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 import com.moez.QKSMS.synthetic.toolbar.*
@@ -47,8 +50,17 @@ abstract class QkActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Whether to add space below the screen's content, lifting the bottom bars into easy thumb reach
+     */
+    protected open val thumbReachPadding = true
+
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
+        if (thumbReachPadding) {
+            findViewById<View>(android.R.id.content)
+                    .setPadding(bottom = resources.getDimensionPixelSize(R.dimen.thumb_reach_padding))
+        }
         setSupportActionBar(toolbar)
         title = title // The title may have been set before layout inflation
     }

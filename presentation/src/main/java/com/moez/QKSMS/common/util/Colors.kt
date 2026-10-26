@@ -78,24 +78,14 @@ class Colors @Inject constructor(
     private val secondaryTextLuminance = measureLuminance(context.getColorCompat(R.color.textSecondaryDark))
     private val tertiaryTextLuminance = measureLuminance(context.getColorCompat(R.color.textTertiaryDark))
 
-    fun theme(recipient: Recipient? = null): Theme {
-        val pref = prefs.theme(recipient?.id ?: 0)
-        val color = when {
-            recipient == null || !prefs.autoColor.get() || pref.isSet -> pref.get()
-            else -> generateColor(recipient)
-        }
-        return Theme(color, this)
-    }
+    /**
+     * The app follows the system's Material You accent (see accentDefault in values-v31), so every conversation and
+     * contact uses the same colour. The recipient parameter is kept for callers that theme per conversation.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    fun theme(recipient: Recipient? = null): Theme = Theme(context.getColorCompat(R.color.accentDefault), this)
 
-    fun themeObservable(recipient: Recipient? = null): Observable<Theme> {
-        val pref = when {
-            recipient == null -> prefs.theme()
-            prefs.autoColor.get() -> prefs.theme(recipient.id, generateColor(recipient))
-            else -> prefs.theme(recipient.id, prefs.theme().get())
-        }
-        return pref.asObservable()
-                .map { color -> Theme(color, this) }
-    }
+    fun themeObservable(recipient: Recipient? = null): Observable<Theme> = Observable.fromCallable { theme(recipient) }
 
     fun highlightColorForTheme(theme: Int): Int = FloatArray(3)
             .apply { Color.colorToHSV(theme, this) }

@@ -20,6 +20,7 @@ package com.moez.QKSMS.common.util.extensions
 
 import android.app.job.JobScheduler
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.TypedValue
@@ -70,6 +71,10 @@ fun Context.resolveThemeColorStateList(attributeId: Int, default: Int = 0): Colo
 
 
     return getColorStateListCompat(if (wasResolved) outValue.resourceId else default)
+}
+
+fun Context.isSystemNightMode(): Boolean {
+    return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 }
 
 fun Context.makeToast(@StringRes res: Int, duration: Int = Toast.LENGTH_SHORT) {

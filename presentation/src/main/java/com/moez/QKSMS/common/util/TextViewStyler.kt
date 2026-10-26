@@ -31,15 +31,12 @@ import com.moez.QKSMS.common.util.TextViewStyler.Companion.SIZE_TOOLBAR
 import com.moez.QKSMS.common.util.extensions.getColorCompat
 import com.moez.QKSMS.common.widget.QkEditText
 import com.moez.QKSMS.common.widget.QkTextView
-import com.moez.QKSMS.util.Preferences
 import javax.inject.Inject
 
 
 
 class TextViewStyler @Inject constructor(
-    private val prefs: Preferences,
-    private val colors: Colors,
-    private val fontProvider: FontProvider
+    private val colors: Colors
 ) {
 
     companion object {
@@ -107,11 +104,7 @@ class TextViewStyler @Inject constructor(
         var colorAttr = 0
         var textSizeAttr = 0
 
-        if (!prefs.systemFont.get()) {
-            fontProvider.getLato { lato ->
-                textView.setTypeface(lato, textView.typeface?.style ?: Typeface.NORMAL)
-            }
-        } else if (textView.typeface?.isBold == true) {
+        if (textView.typeface?.isBold == true) {
             // Google's apps use the medium weight of the system font where this app used bold
             textView.typeface = mediumTypeface
         }
@@ -156,55 +149,15 @@ class TextViewStyler @Inject constructor(
      * @see SIZE_TOOLBAR
      */
     fun setTextSize(textView: TextView, textSizeAttr: Int) {
-        val textSizePref = prefs.textSize.get()
-        when (textSizeAttr) {
-            SIZE_PRIMARY -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 14f
-                Preferences.TEXT_SIZE_NORMAL -> 16f
-                Preferences.TEXT_SIZE_LARGE -> 18f
-                Preferences.TEXT_SIZE_LARGER -> 20f
-                else -> 16f
-            }
-
-            SIZE_SECONDARY -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 12f
-                Preferences.TEXT_SIZE_NORMAL -> 14f
-                Preferences.TEXT_SIZE_LARGE -> 16f
-                Preferences.TEXT_SIZE_LARGER -> 18f
-                else -> 14f
-            }
-
-            SIZE_TERTIARY -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 10f
-                Preferences.TEXT_SIZE_NORMAL -> 12f
-                Preferences.TEXT_SIZE_LARGE -> 14f
-                Preferences.TEXT_SIZE_LARGER -> 16f
-                else -> 12f
-            }
-
-            SIZE_TOOLBAR -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 20f
-                Preferences.TEXT_SIZE_NORMAL -> 22f
-                Preferences.TEXT_SIZE_LARGE -> 24f
-                Preferences.TEXT_SIZE_LARGER -> 28f
-                else -> 22f
-            }
-
-            SIZE_DIALOG -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 16f
-                Preferences.TEXT_SIZE_NORMAL -> 18f
-                Preferences.TEXT_SIZE_LARGE -> 20f
-                Preferences.TEXT_SIZE_LARGER -> 24f
-                else -> 18f
-            }
-
-            SIZE_EMOJI -> textView.textSize = when (textSizePref) {
-                Preferences.TEXT_SIZE_SMALL -> 28f
-                Preferences.TEXT_SIZE_NORMAL -> 32f
-                Preferences.TEXT_SIZE_LARGE -> 36f
-                Preferences.TEXT_SIZE_LARGER -> 40f
-                else -> 32f
-            }
+        // Material 3 type scale. These are sp values, so they follow Android's font size setting
+        textView.textSize = when (textSizeAttr) {
+            SIZE_PRIMARY -> 16f
+            SIZE_SECONDARY -> 14f
+            SIZE_TERTIARY -> 12f
+            SIZE_TOOLBAR -> 22f
+            SIZE_DIALOG -> 18f
+            SIZE_EMOJI -> 32f
+            else -> return
         }
     }
 

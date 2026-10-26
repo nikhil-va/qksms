@@ -20,17 +20,24 @@ package com.moez.QKSMS.common
 
 import android.app.Activity
 import android.content.Context
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDragHandleView
+import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.extensions.dpToPx
+import com.moez.QKSMS.common.util.extensions.resolveThemeColor
 import com.moez.QKSMS.common.util.extensions.setPadding
 import com.moez.QKSMS.injection.appComponent
 import javax.inject.Inject
 
 /**
- * Wrapper around AlertDialog which makes it easier to display lists that use our UI
+ * Shows a list of options that use our UI, as a bottom sheet (within thumb reach, like Google's apps)
  */
 class QkDialog @Inject constructor(private val context: Context, val adapter: MenuItemAdapter) {
 
@@ -46,10 +53,25 @@ class QkDialog @Inject constructor(private val context: Context, val adapter: Me
         recyclerView.adapter = adapter
         recyclerView.setPadding(top = 8.dpToPx(context), bottom = 8.dpToPx(context))
 
-        val dialog = AlertDialog.Builder(activity)
-                .setTitle(title)
-                .setView(recyclerView)
-                .create()
+        val content = LinearLayout(activity).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(bottom = activity.resources.getDimensionPixelSize(R.dimen.thumb_reach_padding))
+            addView(BottomSheetDragHandleView(activity))
+            title?.let { title ->
+                addView(TextView(activity).apply {
+                    TextViewCompat.setTextAppearance(this, com.google.android.material.R.style.TextAppearance_Material3_TitleLarge)
+                    setTextColor(activity.resolveThemeColor(android.R.attr.textColorPrimary))
+                    setPadding(left = 24.dpToPx(context), right = 24.dpToPx(context), bottom = 8.dpToPx(context))
+                    text = title
+                })
+            }
+            addView(recyclerView)
+        }
+
+        val dialog = BottomSheetDialog(activity)
+        dialog.setContentView(content)
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
 
         val clicks = adapter.menuItemClicks
                 .subscribe { dialog.dismiss() }

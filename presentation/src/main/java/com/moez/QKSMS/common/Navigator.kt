@@ -37,11 +37,9 @@ import com.moez.QKSMS.feature.compose.ComposeActivity
 import com.moez.QKSMS.feature.conversationinfo.ConversationInfoActivity
 import com.moez.QKSMS.feature.gallery.GalleryActivity
 import com.moez.QKSMS.feature.notificationprefs.NotificationPrefsActivity
-import com.moez.QKSMS.feature.plus.PlusActivity
 import com.moez.QKSMS.feature.scheduled.ScheduledActivity
 import com.moez.QKSMS.feature.settings.SettingsActivity
 import com.moez.QKSMS.manager.AnalyticsManager
-import com.moez.QKSMS.manager.BillingManager
 import com.moez.QKSMS.manager.NotificationManager
 import com.moez.QKSMS.manager.PermissionManager
 import java.io.File
@@ -52,7 +50,6 @@ import javax.inject.Singleton
 class Navigator @Inject constructor(
     private val context: Context,
     private val analyticsManager: AnalyticsManager,
-    private val billingManager: BillingManager,
     private val notificationManager: NotificationManager,
     private val permissions: PermissionManager
 ) {
@@ -70,15 +67,6 @@ class Navigator @Inject constructor(
         }
     }
 
-    /**
-     * @param source String to indicate where this QKSMS+ screen was launched from. This should be
-     * one of [main_menu, compose_schedule, settings_night, settings_theme]
-     */
-    fun showQksmsPlusActivity(source: String) {
-        analyticsManager.track("Viewed QKSMS+", Pair("source", source))
-        val intent = Intent(context, PlusActivity::class.java)
-        startActivity(intent)
-    }
 
     /**
      * This won't work unless we use startActivityForResult

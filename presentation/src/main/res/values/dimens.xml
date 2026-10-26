@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Space below each screen's bottom bar, so bars and their menus sit within easy thumb reach and clear of the
+         navigation gesture area -->
+    <dimen name="thumb_reach_padding">24dp</dimen>
+</resources>

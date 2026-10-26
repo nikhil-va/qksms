@@ -41,7 +41,7 @@ import io.reactivex.schedulers.Schedulers
 import com.moez.QKSMS.synthetic.mms_vcard_list_item.*
 import javax.inject.Inject
 
-class VCardBinder @Inject constructor(colors: Colors, private val context: Context) : PartBinder() {
+class VCardBinder @Inject constructor(private val colors: Colors, private val context: Context) : PartBinder() {
 
     override val partLayout = R.layout.mms_vcard_list_item
     override var theme = colors.theme()
@@ -74,16 +74,18 @@ class VCardBinder @Inject constructor(colors: Colors, private val context: Conte
         val params = holder.vCardBackground.layoutParams as FrameLayout.LayoutParams
         if (!message.isMe()) {
             holder.vCardBackground.layoutParams = params.apply { gravity = Gravity.START }
-            holder.vCardBackground.setBackgroundTint(theme.theme)
-            holder.vCardAvatar.setTint(theme.textPrimary)
-            holder.name.setTextColor(theme.textPrimary)
-            holder.label.setTextColor(theme.textTertiary)
-        } else {
-            holder.vCardBackground.layoutParams = params.apply { gravity = Gravity.END }
             holder.vCardBackground.setBackgroundTint(holder.containerView.context.resolveThemeColor(R.attr.bubbleColor))
             holder.vCardAvatar.setTint(holder.containerView.context.resolveThemeColor(android.R.attr.textColorSecondary))
             holder.name.setTextColor(holder.containerView.context.resolveThemeColor(android.R.attr.textColorPrimary))
             holder.label.setTextColor(holder.containerView.context.resolveThemeColor(android.R.attr.textColorTertiary))
+        } else {
+            holder.vCardBackground.layoutParams = params.apply { gravity = Gravity.END }
+            // Sent attachments use the app's accent colour, like sent bubbles
+            val accent = colors.theme()
+            holder.vCardBackground.setBackgroundTint(accent.theme)
+            holder.vCardAvatar.setTint(accent.textPrimary)
+            holder.name.setTextColor(accent.textPrimary)
+            holder.label.setTextColor(accent.textTertiary)
         }
     }
 

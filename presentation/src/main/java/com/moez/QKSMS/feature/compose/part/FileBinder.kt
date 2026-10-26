@@ -37,7 +37,7 @@ import io.reactivex.schedulers.Schedulers
 import com.moez.QKSMS.synthetic.mms_file_list_item.*
 import javax.inject.Inject
 
-class FileBinder @Inject constructor(colors: Colors, private val context: Context) : PartBinder() {
+class FileBinder @Inject constructor(private val colors: Colors, private val context: Context) : PartBinder() {
 
     override val partLayout = R.layout.mms_file_list_item
     override var theme = colors.theme()
@@ -78,16 +78,18 @@ class FileBinder @Inject constructor(colors: Colors, private val context: Contex
         val params = holder.fileBackground.layoutParams as FrameLayout.LayoutParams
         if (!message.isMe()) {
             holder.fileBackground.layoutParams = params.apply { gravity = Gravity.START }
-            holder.fileBackground.setBackgroundTint(theme.theme)
-            holder.icon.setTint(theme.textPrimary)
-            holder.filename.setTextColor(theme.textPrimary)
-            holder.size.setTextColor(theme.textTertiary)
-        } else {
-            holder.fileBackground.layoutParams = params.apply { gravity = Gravity.END }
             holder.fileBackground.setBackgroundTint(holder.containerView.context.resolveThemeColor(R.attr.bubbleColor))
             holder.icon.setTint(holder.containerView.context.resolveThemeColor(android.R.attr.textColorSecondary))
             holder.filename.setTextColor(holder.containerView.context.resolveThemeColor(android.R.attr.textColorPrimary))
             holder.size.setTextColor(holder.containerView.context.resolveThemeColor(android.R.attr.textColorTertiary))
+        } else {
+            holder.fileBackground.layoutParams = params.apply { gravity = Gravity.END }
+            // Sent attachments use the app's accent colour, like sent bubbles
+            val accent = colors.theme()
+            holder.fileBackground.setBackgroundTint(accent.theme)
+            holder.icon.setTint(accent.textPrimary)
+            holder.filename.setTextColor(accent.textPrimary)
+            holder.size.setTextColor(accent.textTertiary)
         }
     }
 

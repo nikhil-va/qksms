@@ -43,6 +43,9 @@ import javax.inject.Inject
 
 class GalleryActivity : QkActivity(), GalleryView {
 
+    // Photos and videos use the whole screen
+    override val thumbReachPadding = false
+
     @Inject lateinit var dateFormatter: DateFormatter
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var pagerAdapter: GalleryPagerAdapter

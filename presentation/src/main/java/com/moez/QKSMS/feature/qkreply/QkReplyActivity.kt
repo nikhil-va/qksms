@@ -45,6 +45,9 @@ import javax.inject.Inject
 
 class QkReplyActivity : QkThemedActivity(), QkReplyView {
 
+    // A floating popup, not a full screen
+    override val thumbReachPadding = false
+
     @Inject lateinit var adapter: MessagesAdapter
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 

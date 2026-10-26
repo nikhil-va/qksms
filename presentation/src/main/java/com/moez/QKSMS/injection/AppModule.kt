@@ -28,11 +28,9 @@ import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.moez.QKSMS.blocking.BlockingClient
 import com.moez.QKSMS.blocking.BlockingManager
 import com.moez.QKSMS.common.ViewModelFactory
-import com.moez.QKSMS.common.util.BillingManagerImpl
 import com.moez.QKSMS.common.util.NotificationManagerImpl
 import com.moez.QKSMS.common.util.ShortcutManagerImpl
 import com.moez.QKSMS.feature.conversationinfo.injection.ConversationInfoComponent
-import com.moez.QKSMS.feature.themepicker.injection.ThemePickerComponent
 import com.moez.QKSMS.listener.ContactAddedListener
 import com.moez.QKSMS.listener.ContactAddedListenerImpl
 import com.moez.QKSMS.manager.ActiveConversationManager
@@ -41,7 +39,6 @@ import com.moez.QKSMS.manager.AlarmManager
 import com.moez.QKSMS.manager.AlarmManagerImpl
 import com.moez.QKSMS.manager.AnalyticsManager
 import com.moez.QKSMS.manager.AnalyticsManagerImpl
-import com.moez.QKSMS.manager.BillingManager
 import com.moez.QKSMS.manager.ChangelogManager
 import com.moez.QKSMS.manager.ChangelogManagerImpl
 import com.moez.QKSMS.manager.KeyManager
@@ -91,8 +88,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module(subcomponents = [
-    ConversationInfoComponent::class,
-    ThemePickerComponent::class])
+    ConversationInfoComponent::class])
 class AppModule(private var application: Application) {
 
     @Provides
@@ -131,9 +127,6 @@ class AppModule(private var application: Application) {
     fun provideContactAddedListener(listener: ContactAddedListenerImpl): ContactAddedListener = listener
 
     // Manager
-
-    @Provides
-    fun provideBillingManager(manager: BillingManagerImpl): BillingManager = manager
 
     @Provides
     fun provideActiveConversationManager(manager: ActiveConversationManagerImpl): ActiveConversationManager = manager

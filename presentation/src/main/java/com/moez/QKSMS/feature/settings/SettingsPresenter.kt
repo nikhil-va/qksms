@@ -28,7 +28,6 @@ import com.moez.QKSMS.common.util.extensions.makeToast
 import com.moez.QKSMS.interactor.DeleteOldMessages
 import com.moez.QKSMS.interactor.SyncMessages
 import com.moez.QKSMS.manager.AnalyticsManager
-import com.moez.QKSMS.manager.BillingManager
 import com.moez.QKSMS.repository.MessageRepository
 import com.moez.QKSMS.repository.SyncRepository
 import com.moez.QKSMS.service.AutoDeleteService
@@ -46,47 +45,17 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SettingsPresenter @Inject constructor(
-    colors: Colors,
     syncRepo: SyncRepository,
     private val analytics: AnalyticsManager,
     private val context: Context,
-    private val billingManager: BillingManager,
-    private val dateFormatter: DateFormatter,
     private val deleteOldMessages: DeleteOldMessages,
     private val messageRepo: MessageRepository,
     private val navigator: Navigator,
-    private val nightModeManager: NightModeManager,
     private val prefs: Preferences,
     private val syncMessages: SyncMessages
-) : QkPresenter<SettingsView, SettingsState>(SettingsState(
-        nightModeId = prefs.nightMode.get()
-)) {
+) : QkPresenter<SettingsView, SettingsState>(SettingsState()) {
 
     init {
-        disposables += colors.themeObservable()
-                .subscribe { theme -> newState { copy(theme = theme.theme) } }
-
-        val nightModeLabels = context.resources.getStringArray(R.array.night_modes)
-        disposables += prefs.nightMode.asObservable()
-                .subscribe { nightMode ->
-                    newState { copy(nightModeSummary = nightModeLabels[nightMode], nightModeId = nightMode) }
-                }
-
-        disposables += prefs.nightStart.asObservable()
-                .map { time -> nightModeManager.parseTime(time) }
-                .map { calendar -> calendar.timeInMillis }
-                .map { millis -> dateFormatter.getTimestamp(millis) }
-                .subscribe { nightStart -> newState { copy(nightStart = nightStart) } }
-
-        disposables += prefs.nightEnd.asObservable()
-                .map { time -> nightModeManager.parseTime(time) }
-                .map { calendar -> calendar.timeInMillis }
-                .map { millis -> dateFormatter.getTimestamp(millis) }
-                .subscribe { nightEnd -> newState { copy(nightEnd = nightEnd) } }
-
-        disposables += prefs.black.asObservable()
-                .subscribe { black -> newState { copy(black = black) } }
-
         disposables += prefs.notifications().asObservable()
                 .subscribe { enabled -> newState { copy(notificationsEnabled = enabled) } }
 
@@ -102,18 +71,6 @@ class SettingsPresenter @Inject constructor(
 
         disposables += prefs.signature.asObservable()
                 .subscribe { signature -> newState { copy(signature = signature) } }
-
-        val textSizeLabels = context.resources.getStringArray(R.array.text_sizes)
-        disposables += prefs.textSize.asObservable()
-                .subscribe { textSize ->
-                    newState { copy(textSizeSummary = textSizeLabels[textSize], textSizeId = textSize) }
-                }
-
-        disposables += prefs.autoColor.asObservable()
-                .subscribe { autoColor -> newState { copy(autoColor = autoColor) } }
-
-        disposables += prefs.systemFont.asObservable()
-                .subscribe { enabled -> newState { copy(systemFontEnabled = enabled) } }
 
         disposables += prefs.unicode.asObservable()
                 .subscribe { enabled -> newState { copy(stripUnicodeEnabled = enabled) } }
@@ -152,22 +109,6 @@ class SettingsPresenter @Inject constructor(
                     Timber.v("Preference click: ${context.resources.getResourceName(it.id)}")
 
                     when (it.id) {
-                        R.id.theme -> view.showThemePicker()
-
-                        R.id.night -> view.showNightModeDialog()
-
-                        R.id.nightStart -> {
-                            val date = nightModeManager.parseTime(prefs.nightStart.get())
-                            view.showStartTimePicker(date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE))
-                        }
-
-                        R.id.nightEnd -> {
-                            val date = nightModeManager.parseTime(prefs.nightEnd.get())
-                            view.showEndTimePicker(date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE))
-                        }
-
-                        R.id.black -> prefs.black.set(!prefs.black.get())
-
                         R.id.autoEmoji -> prefs.autoEmoji.set(!prefs.autoEmoji.get())
 
                         R.id.notifications -> navigator.showNotificationSettings()
@@ -179,15 +120,6 @@ class SettingsPresenter @Inject constructor(
                         R.id.delivery -> prefs.delivery.set(!prefs.delivery.get())
 
                         R.id.signature -> view.showSignatureDialog(prefs.signature.get())
-
-                        R.id.textSize -> view.showTextSizePicker()
-
-                        R.id.autoColor -> {
-                            analytics.setUserProperty("Preference: Auto Color", !prefs.autoColor.get())
-                            prefs.autoColor.set(!prefs.autoColor.get())
-                        }
-
-                        R.id.systemFont -> prefs.systemFont.set(!prefs.systemFont.get())
 
                         R.id.unicode -> prefs.unicode.set(!prefs.unicode.get())
 
@@ -216,43 +148,9 @@ class SettingsPresenter @Inject constructor(
                     })
                 }
 
-        view.nightModeSelected()
-                .withLatestFrom(billingManager.upgradeStatus) { mode, upgraded ->
-                    if (!upgraded && mode == Preferences.NIGHT_MODE_AUTO) {
-                        view.showQksmsPlusSnackbar()
-                    } else {
-                        nightModeManager.updateNightMode(mode)
-                    }
-                }
-                .autoDisposable(view.scope())
-                .subscribe()
-
-        view.viewQksmsPlusClicks()
-                .autoDisposable(view.scope())
-                .subscribe { navigator.showQksmsPlusActivity("settings_night") }
-
-        view.nightStartSelected()
-                .autoDisposable(view.scope())
-                .subscribe { nightModeManager.setNightStart(it.first, it.second) }
-
-        view.nightEndSelected()
-                .autoDisposable(view.scope())
-                .subscribe { nightModeManager.setNightEnd(it.first, it.second) }
-
-        view.textSizeSelected()
-                .autoDisposable(view.scope())
-                .subscribe(prefs.textSize::set)
-
         view.sendDelaySelected()
-                .withLatestFrom(billingManager.upgradeStatus) { duration, upgraded ->
-                    if (!upgraded && duration != 0) {
-                        view.showQksmsPlusSnackbar()
-                    } else {
-                        prefs.sendDelay.set(duration)
-                    }
-                }
                 .autoDisposable(view.scope())
-                .subscribe()
+                .subscribe(prefs.sendDelay::set)
 
         view.signatureChanged()
                 .doOnNext(prefs.signature::set)

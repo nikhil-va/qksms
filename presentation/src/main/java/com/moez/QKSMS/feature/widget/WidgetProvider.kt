@@ -31,6 +31,7 @@ import android.widget.RemoteViews
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.extensions.getColorCompat
+import com.moez.QKSMS.common.util.extensions.isSystemNightMode
 import com.moez.QKSMS.feature.compose.ComposeActivity
 import com.moez.QKSMS.feature.main.MainActivity
 import com.moez.QKSMS.manager.WidgetManager
@@ -108,21 +109,14 @@ class WidgetProvider : AppWidgetProvider() {
         Timber.v("updateWidget appWidgetId: $appWidgetId")
         val remoteViews = RemoteViews(context.packageName, R.layout.widget)
 
-        // Apply colors from theme
-        val night = prefs.night.get()
-        val black = prefs.black.get()
+        // Apply colors from the system's light/dark setting
+        val night = context.isSystemNightMode()
 
-        remoteViews.setInt(R.id.background, "setColorFilter", context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
-            else -> R.color.white
-        }))
+        remoteViews.setInt(R.id.background, "setColorFilter",
+                context.getColorCompat(if (night) R.color.backgroundDark else R.color.white))
 
-        remoteViews.setInt(R.id.toolbar, "setColorFilter", context.getColorCompat(when {
-            night && black -> R.color.black
-            night && !black -> R.color.backgroundDark
-            else -> R.color.backgroundLight
-        }))
+        remoteViews.setInt(R.id.toolbar, "setColorFilter",
+                context.getColorCompat(if (night) R.color.backgroundDark else R.color.backgroundLight))
 
         remoteViews.setTextColor(R.id.title, context.getColorCompat(when (night) {
             true -> R.color.textPrimaryDark

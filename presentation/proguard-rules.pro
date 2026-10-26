@@ -90,3 +90,13 @@
     <init>(...);
     <fields>;
 }
+
+# Conductor creates controllers and change handlers by reflection (e.g. when restoring state or starting a
+# controller from a saved backstack), so R8's full mode must keep their no-argument and Bundle constructors
+-keepclassmembers class * extends com.bluelinelabs.conductor.ControllerChangeHandler {
+    public <init>();
+}
+-keepclassmembers class * extends com.bluelinelabs.conductor.Controller {
+    public <init>();
+    public <init>(android.os.Bundle);
+}

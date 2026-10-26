@@ -100,7 +100,6 @@
                 android:value=".common.util.QkChooserTargetService" />
         </activity>
         <activity android:name=".feature.settings.SettingsActivity" />
-        <activity android:name=".feature.plus.PlusActivity" />
         <activity
             android:name=".feature.gallery.GalleryActivity"
             android:theme="@style/AppTheme.Black" />
@@ -212,9 +211,6 @@
         <meta-data
             android:name="com.callcontrol.datashare.messaging"
             android:value="true" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
