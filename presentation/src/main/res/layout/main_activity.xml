@@ -36,9 +36,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             app:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.moez.QKSMS.common.widget.QkTextView
                 android:id="@+id/toolbarTitle"
@@ -74,7 +74,7 @@
             android:gravity="center"
             android:padding="56dp"
             app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Your conversations will appear here"
             tools:visibility="invisible" />
 
@@ -88,31 +88,20 @@
             android:paddingBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/conversation_list_item" />
 
-        <ImageView
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/compose"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/circle_ripple"
             android:contentDescription="@string/main_fab_cd"
-            android:elevation="8dp"
-            android:padding="16dp"
-            android:src="@drawable/ic_add_black_24dp"
-            android:tint="@color/white"
+            android:text="@string/main_fab_text"
+            app:icon="@drawable/ic_add_black_24dp"
             app:layout_constraintBottom_toTopOf="@id/bottom"
             app:layout_constraintEnd_toEndOf="parent"
             tools:backgroundTint="@color/tools_theme" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:background="@drawable/ab_shadow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <View
             android:id="@+id/bottom"
@@ -135,7 +124,7 @@
             android:layout_height="wrap_content"
             android:inflatedId="@id/syncing"
             android:layout="@layout/main_syncing"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

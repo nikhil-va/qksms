@@ -37,6 +37,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.clicks
@@ -152,6 +153,16 @@ class MainActivity : QkThemedActivity(), MainView {
         itemTouchCallback.adapter = conversationsAdapter
         conversationsAdapter.autoScrollToStart(recyclerView)
 
+        // Like Google Messages, collapse the FAB to an icon while scrolling down the list
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                when {
+                    dy > 0 -> compose.shrink()
+                    dy < 0 -> compose.extend()
+                }
+            }
+        })
+
         // Don't allow clicks to pass through the drawer layout
         drawer.clicks().autoDisposable(scope()).subscribe()
 
@@ -182,8 +193,9 @@ class MainActivity : QkThemedActivity(), MainView {
                     rateIcon.setTint(theme.theme)
                     compose.setBackgroundTint(theme.theme)
 
-                    // Set the FAB compose icon color
-                    compose.setTint(theme.textPrimary)
+                    // Set the FAB compose icon and label color
+                    compose.iconTint = ColorStateList.valueOf(theme.textPrimary)
+                    compose.setTextColor(theme.textPrimary)
                 }
 
         // These theme attributes don't apply themselves on API 21

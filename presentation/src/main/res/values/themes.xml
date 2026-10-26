@@ -20,12 +20,13 @@
 <resources>
 
     <attr name="bubbleColor" format="reference" />
+    <attr name="barColor" format="reference" />
     <attr name="switchThumbEnabled" format="color" />
     <attr name="switchThumbDisabled" format="color" />
     <attr name="switchTrackEnabled" format="color" />
     <attr name="switchTrackDisabled" format="color" />
 
-    <style name="AppLaunchTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppLaunchTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:navigationBarColor">@color/backgroundDark</item>
         <item name="android:statusBarColor">@color/backgroundDark</item>
         <item name="android:windowBackground">@color/backgroundDark</item>
@@ -33,7 +34,7 @@
 
     <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:divider">@color/separatorLight</item>
         <item name="android:queryBackground">@color/bubbleLight</item>
         <item name="android:statusBarColor">@color/black</item>
@@ -44,8 +45,24 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="actionBarPopupTheme">@style/PopupTheme</item>
         <item name="bubbleColor">@color/bubbleLight</item>
-        <item name="colorPrimary">@color/backgroundLight</item>
-        <item name="colorPrimaryDark">@color/backgroundLight</item>
+        <item name="barColor">@color/backgroundLight</item>
+        <item name="colorPrimary">@color/accentDefault</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/bubbleLight</item>
+        <item name="colorOnPrimaryContainer">@color/textPrimary</item>
+        <item name="colorSecondary">@color/accentDefault</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/bubbleLight</item>
+        <item name="colorOnSecondaryContainer">@color/textPrimary</item>
+        <item name="colorSurface">@color/backgroundLight</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="colorOnSurfaceVariant">@color/textSecondary</item>
+        <item name="colorSurfaceContainerLowest">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerLow">@color/backgroundLight</item>
+        <item name="colorSurfaceContainer">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerHigh">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerHighest">@color/bubbleLight</item>
+        <item name="android:colorBackground">@color/backgroundLight</item>
         <item name="selectableItemBackground">@drawable/ripple</item>
         <item name="switchThumbEnabled">@color/switchThumbEnabledLight</item>
         <item name="switchThumbDisabled">@color/switchThumbDisabledLight</item>
@@ -54,20 +71,36 @@
         <item name="windowActionBar">false</item>
     </style>
 
-    <style name="AppThemeDialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppThemeDialog" parent="Theme.Material3.Light.Dialog">
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorTertiary">@color/text_tertiary</item>
         <item name="android:windowBackground">@color/backgroundLight</item>
         <item name="actionBarPopupTheme">@style/PopupTheme</item>
         <item name="bubbleColor">@color/bubbleLight</item>
-        <item name="colorPrimary">@color/backgroundLight</item>
-        <item name="colorPrimaryDark">@color/backgroundLight</item>
+        <item name="barColor">@color/backgroundLight</item>
+        <item name="colorPrimary">@color/accentDefault</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/bubbleLight</item>
+        <item name="colorOnPrimaryContainer">@color/textPrimary</item>
+        <item name="colorSecondary">@color/accentDefault</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/bubbleLight</item>
+        <item name="colorOnSecondaryContainer">@color/textPrimary</item>
+        <item name="colorSurface">@color/backgroundLight</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="colorOnSurfaceVariant">@color/textSecondary</item>
+        <item name="colorSurfaceContainerLowest">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerLow">@color/backgroundLight</item>
+        <item name="colorSurfaceContainer">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerHigh">@color/backgroundLight</item>
+        <item name="colorSurfaceContainerHighest">@color/bubbleLight</item>
+        <item name="android:colorBackground">@color/backgroundLight</item>
         <item name="selectableItemBackground">@drawable/ripple</item>
         <item name="windowActionBar">false</item>
     </style>
 
-    <style name="PopupTheme" parent="ThemeOverlay.AppCompat.Light">
+    <style name="PopupTheme" parent="ThemeOverlay.Material3.Light">
         <item name="android:colorBackground">@color/backgroundLight</item>
         <item name="android:textColor">@color/textPrimary</item>
     </style>

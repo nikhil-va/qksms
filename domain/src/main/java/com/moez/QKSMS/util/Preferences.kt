@@ -149,12 +149,18 @@ class Preferences @Inject constructor(
         sharedPrefs.registerOnSharedPreferenceChangeListener(listener)
     }.share()
 
+    // Until a theme color is picked, follow the wallpaper's accent color (Material You) on Android 12+
+    private val defaultTheme: Int = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> context.getColor(android.R.color.system_accent1_600)
+        else -> 0xFF0097A7.toInt()
+    }
+
     fun theme(
         recipientId: Long = 0,
-        default: Int = rxPrefs.getInteger("theme", 0xFF0097A7.toInt()).get()
+        default: Int = rxPrefs.getInteger("theme", defaultTheme).get()
     ): Preference<Int> {
         return when (recipientId) {
-            0L -> rxPrefs.getInteger("theme", 0xFF0097A7.toInt())
+            0L -> rxPrefs.getInteger("theme", defaultTheme)
             else -> rxPrefs.getInteger("theme_$recipientId", default)
         }
     }

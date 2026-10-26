@@ -28,7 +28,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -260,6 +260,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:background="?android:attr/divider" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

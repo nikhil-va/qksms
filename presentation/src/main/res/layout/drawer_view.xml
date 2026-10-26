@@ -22,11 +22,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground">
+    android:background="?android:attr/windowBackground"
+    android:fillViewport="true">
 
+    <!-- Items sit at the bottom of the drawer, within thumb reach -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         android:orientation="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp">

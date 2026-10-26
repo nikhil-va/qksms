@@ -123,7 +123,7 @@ abstract class QkThemedActivity : QkActivity() {
         }
 
         // Set the color for the recent apps title
-        val toolbarColor = resolveThemeColor(R.attr.colorPrimary)
+        val toolbarColor = resolveThemeColor(R.attr.barColor)
         val icon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val taskDesc = ActivityManager.TaskDescription(getString(R.string.app_name), icon, toolbarColor)
         setTaskDescription(taskDesc)

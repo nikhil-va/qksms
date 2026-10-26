@@ -57,3 +57,7 @@ freeline_project_description.json
 backup-*.json
 tools/bank-sms/input/
 tools/bank-sms/out/
+
+# Release signing config (passwords)
+key.properties
+*.keystore
