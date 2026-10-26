@@ -165,7 +165,10 @@ class MainViewModel @Inject constructor(
                 GlobalScope.launch(Dispatchers.Main) {
                     val changelog = changelogManager.getChangelog()
                     changelogManager.markChangelogSeen()
-                    view.showChangelog(changelog)
+                    // The bundled changelog may have nothing for this version
+                    if (changelog.added.isNotEmpty() || changelog.improved.isNotEmpty() || changelog.fixed.isNotEmpty()) {
+                        view.showChangelog(changelog)
+                    }
                 }
             } else {
                 changelogManager.markChangelogSeen()

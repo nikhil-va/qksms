@@ -250,7 +250,11 @@ class MainActivity : QkThemedActivity(), MainView {
         toolbar.menu.findItem(R.id.selectAll)?.isVisible = state.page is Inbox || state.page is Archived
         toolbar.menu.findItem(R.id.readAll)?.isVisible = state.page is Inbox && selectedConversations == 0
 
-        // Large title at the top of the screen
+        // Large title at the top of the screen, expanded again whenever the page changes
+        if (state.page.javaClass != lastPageType) {
+            lastPageType = state.page.javaClass
+            titleBar.setExpanded(true, false)
+        }
         pageTitle.setVisible(state.page !is Searching)
         pageTitle.setText(when (state.page) {
             is Archived -> R.string.title_archived
@@ -377,6 +381,8 @@ class MainActivity : QkThemedActivity(), MainView {
         dismissKeyboard()
         toolbarSearch.text = null
     }
+
+    private var lastPageType: Class<*>? = null
 
     override fun selectAll() {
         conversationsAdapter.selectAll()

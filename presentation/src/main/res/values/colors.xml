@@ -66,7 +66,8 @@
     <color name="tools_theme">#00838F</color>
     <!-- Matches the default theme color in Preferences -->
     <color name="accentDefault">#0097A7</color>
-    <color name="ic_launcher_background">#1E6FE8</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="ic_launcher_bubble">#34B356</color>
 
     <array name="random_colors">
         <item>#06C9AF</item>

@@ -30,7 +30,7 @@
         <intent
             android:action="com.moez.QKSMS.START"
             android:targetClass="com.moez.QKSMS.feature.compose.ComposeActivity"
-            android:targetPackage="com.nikhilva.qksms" />
+            android:targetPackage="com.napps.sms" />
 
         <categories android:name="android.shortcut.conversation" />
 

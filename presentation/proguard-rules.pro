@@ -100,3 +100,12 @@
     public <init>();
     public <init>(android.os.Bundle);
 }
+
+# Moshi reads the changelog and backup files through KotlinJsonAdapterFactory (reflection), which needs the Kotlin
+# metadata and the JSON model classes intact. Without these, R8's full mode breaks them in release builds
+-keepattributes Signature, RuntimeVisibleAnnotations, AnnotationDefault
+-keep class kotlin.Metadata { *; }
+-keep class com.moez.QKSMS.manager.ChangelogManagerImpl$Changeset { *; }
+-keep class com.moez.QKSMS.repository.BackupRepositoryImpl$Backup { *; }
+-keep class com.moez.QKSMS.repository.BackupRepositoryImpl$BackupMetadata { *; }
+-keep class com.moez.QKSMS.repository.BackupRepositoryImpl$BackupMessage { *; }

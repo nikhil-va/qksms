@@ -29,22 +29,6 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
-        <!-- Large page title in the space at the top of the screen -->
-        <TextView
-            android:id="@+id/pageTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="24dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="8dp"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-            android:textColor="?android:attr/textColorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Messages" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
@@ -81,31 +65,63 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <com.moez.QKSMS.common.widget.QkTextView
-            android:id="@+id/empty"
-            style="@style/TextSecondary"
-            android:layout_width="match_parent"
+        <!-- The large page title scrolls away with the list, like a sliver app bar -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/listArea"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="56dp"
             app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toBottomOf="@id/pageTitle"
-            tools:text="Your conversations will appear here"
-            tools:visibility="invisible" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintTop_toBottomOf="@id/pageTitle"
-            tools:listitem="@layout/conversation_list_item" />
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/titleBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:elevation="0dp"
+                app:liftOnScroll="false">
+
+                <TextView
+                    android:id="@+id/pageTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24dp"
+                    android:paddingTop="32dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="8dp"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:textColor="?android:attr/textColorPrimary"
+                    app:layout_scrollFlags="scroll|snap"
+                    tools:text="Messages" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/conversation_list_item" />
+
+            <com.moez.QKSMS.common.widget.QkTextView
+                android:id="@+id/empty"
+                style="@style/TextSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="56dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:text="Your conversations will appear here"
+                tools:visibility="invisible" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/compose"

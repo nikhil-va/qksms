@@ -21,6 +21,25 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
+// Version: version.properties holds the version of the last release build. Every release or optimized build bumps
+// versionCode and the patch number first, so each build can be uploaded to Play and installed as an update.
+// Debug builds keep the current version.
+def versionFile = rootProject.file("version.properties")
+def versionProps = new Properties()
+versionFile.withInputStream { versionProps.load(it) }
+def isReleaseBuild = gradle.startParameter.taskNames.any { taskName ->
+    def name = taskName.toLowerCase()
+    ["assemble", "bundle", "install"].any { name.contains(it) } && ["release", "optimized"].any { name.contains(it) }
+}
+if (isReleaseBuild) {
+    def (major, minor, patch) = versionProps["versionName"].tokenize(".")*.toInteger()
+    versionProps["versionCode"] = (versionProps["versionCode"].toInteger() + 1).toString()
+    versionProps["versionName"] = "${major}.${minor}.${patch + 1}".toString()
+    def header = versionFile.readLines().takeWhile { it.startsWith("#") }.join("\n")
+    versionFile.text = "${header}\nversionCode=${versionProps["versionCode"]}\nversionName=${versionProps["versionName"]}\n"
+    logger.lifecycle("Version bumped to ${versionProps["versionName"]} (${versionProps["versionCode"]})")
+}
+
 // Release signing comes from key.properties (gitignored) when it exists:
 // storeFile, storePassword, keyAlias, keyPassword
 def keyPropertiesFile = rootProject.file("key.properties")
@@ -37,12 +56,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.nikhilva.qksms"
+        applicationId "com.napps.sms"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 2218
-        versionName "3.9.4"
-        setProperty("archivesBaseName", "QKSMS-v${versionName}")
+        versionCode versionProps["versionCode"].toInteger()
+        versionName versionProps["versionName"]
+        setProperty("archivesBaseName", "NSMS-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Phones (and emulators on Apple silicon) are ARM; leaving out the x86 copies of Realm's native library

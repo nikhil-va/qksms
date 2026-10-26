@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Launcher icon: a speech bubble with three dots, drawn in the 108dp adaptive icon grid -->
+<!-- Launcher icon: a speech bubble with two lines of text, drawn in the 108dp adaptive icon grid -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <group android:translateY="-2">
+    <group android:translateY="-1">
 
-        <!-- Bubble, with the dots cut out so the background shows through -->
+        <!-- Bubble, with the text lines cut out so the background shows through -->
         <path
             android:fillColor="#FF000000"
             android:fillType="evenOdd"
-            android:pathData="M42,32 H66 A12,12 0 0 1 78,44 V58 A12,12 0 0 1 66,70 H42 A12,12 0 0 1 30,58 V44 A12,12 0 0 1 42,32 Z M38.5,51 a3.5,3.5 0 1 0 7,0 a3.5,3.5 0 1 0 -7,0 Z M50.5,51 a3.5,3.5 0 1 0 7,0 a3.5,3.5 0 1 0 -7,0 Z M62.5,51 a3.5,3.5 0 1 0 7,0 a3.5,3.5 0 1 0 -7,0 Z" />
+            android:pathData="M45,30 H63 A17,17 0 0 1 80,47 V51 A17,17 0 0 1 63,68 H45 A17,17 0 0 1 28,51 V47 A17,17 0 0 1 45,30 Z M38.5,41.5 H69.5 A2.5,2.5 0 0 1 69.5,46.5 H38.5 A2.5,2.5 0 0 1 38.5,41.5 Z M38.5,51.5 H55.5 A2.5,2.5 0 0 1 55.5,56.5 H38.5 A2.5,2.5 0 0 1 38.5,51.5 Z" />
 
         <!-- Tail -->
         <path
             android:fillColor="#FF000000"
-            android:pathData="M33,62 L33,80 L48,69 Z" />
+            android:pathData="M60,66 L79,80 L75,59 Z" />
 
     </group>
 
